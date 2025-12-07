@@ -19,6 +19,11 @@ traders:
     slippage: 5 # Slippage tolerance in percentage, compare trader's avg price with current market before executing auto buy, e.g., 5 means 5%, 0 means no slippage check
 ```
 
+Dont forget to install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
 ### How to get Private Key
 
 ![Get Private Key](images/export-private-key.png)
