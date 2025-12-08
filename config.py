@@ -26,11 +26,19 @@ class ConfigTrader:
 
 
 @dataclass(frozen=True)
+class ConfigGrok:
+    api_key: str
+    model: str
+    temperature: float
+
+
+@dataclass(frozen=True)
 class Config:
     private_key: str
     funder_address: str
     percent_sell: int
     traders: list[ConfigTrader]
+    grok: ConfigGrok
 
     @staticmethod
     def load_yaml(file_path: str) -> 'Config':
@@ -56,5 +64,6 @@ class Config:
             private_key=private_key,
             funder_address=funder_address,
             percent_sell=percent_sell,
-            traders=[ConfigTrader(**trader) for trader in traders]
+            traders=[ConfigTrader(**trader) for trader in traders],
+            grok=ConfigGrok(**data.get("grok", {})),
         )

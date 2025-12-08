@@ -6,3 +6,13 @@ class CopyTradeException(Exception):
 
     def __str__(self) -> str:
         return self.message
+
+
+@dataclass
+class PredictException(Exception):
+    message: str
+
+    def __str__(self) -> str:
+        return self.message
+
+
