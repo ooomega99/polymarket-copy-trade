@@ -289,15 +289,14 @@ class PolymarketCopyTrade:
     def run(self) -> None:
         for trader in self.traders:
             try:
-                positions: list[Position] = self.api.data.core.positions(
-                    address=trader.address,
-                    size_threshold=trader.threshold
-                )
+                positions: list[Position] = self.api.data.core.positions(address=trader.address)
             except Exception:
                 logger.exception("Failed to fetch positions for trader %s", trader.address)
                 continue
 
             for position in positions:
+                if position.initial_value < trader.threshold:
+                    continue
                 try:
                     self.buy(trader, position)
                 except Exception:
